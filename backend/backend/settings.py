@@ -103,7 +103,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'      # без префикса /taski
+
 STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
@@ -114,3 +114,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
+
+
+FORCE_SCRIPT_NAME = '/taski'          # без слеша в конце!
+STATIC_URL = '/taski/static/'         # обнови, если было просто '/static/'
+LOGIN_URL = '/taski/admin/login/'
+LOGIN_REDIRECT_URL = '/taski/admin/'
+LOGOUT_REDIRECT_URL = '/taski/admin/login/'
