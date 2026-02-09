@@ -104,7 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 FORCE_SCRIPT_NAME = '/taski'
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'      # без префикса /taski
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
