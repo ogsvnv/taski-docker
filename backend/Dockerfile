@@ -5,9 +5,15 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# Установка зависимостей
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Копируем проект
 COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Собираем статику сразу при сборке контейнера
+RUN python manage.py collectstatic --noinput
+
+# Используем Gunicorn для продакшена
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
