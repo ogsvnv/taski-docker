@@ -1,0 +1,41 @@
+services:
+  taski_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: taski_backend:latest
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - static:/app/static/
+    env_file:
+      - .env
+
+  taski_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: taski_frontend:latest
+    volumes:
+      - frontend_build:/app/build
+
+  taski_gateway:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: taski_gateway:latest
+    restart: always
+    ports:
+      - "8000:80"
+    depends_on:
+      - taski_backend
+      - taski_frontend
+    volumes:
+      - static:/static/
+      - frontend_build:/usr/share/nginx/html:ro
+
+volumes:
+  static:
+  frontend_build:
+  
