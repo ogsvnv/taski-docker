@@ -7,7 +7,13 @@ SECRET_KEY = 'django-insecure-j_89af+30&&4qm*8z9_(^zz8p4-ho8z_m6ylm0s$h!-p@on1_^
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.0.1:8000', 'gateway', 'shultimovcapital.online', 'www.shultimovcapital.online', '0.0.0.0']
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = ['localhost', '127.0.0.1', '127.0.0.1:8000', 'gateway', 'shultimovcapital.online', 'www.shultimovcapital.online', '0.0.0.0']
 
 
 # Application definition
@@ -105,6 +111,7 @@ USE_TZ = True
 
 
 STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'         # обнови, если было просто '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -116,8 +123,3 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 
-FORCE_SCRIPT_NAME = '/taski'          # без слеша в конце!
-STATIC_URL = '/taski/static/'         # обнови, если было просто '/static/'
-LOGIN_URL = '/taski/admin/login/'
-LOGIN_REDIRECT_URL = '/taski/admin/'
-LOGOUT_REDIRECT_URL = '/taski/admin/login/'
