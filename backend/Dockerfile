@@ -12,8 +12,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Копируем проект
 COPY . .
 
-# Собираем статику сразу при сборке контейнера
-RUN python manage.py collectstatic --noinput
-
 # Используем Gunicorn для продакшена
 CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
